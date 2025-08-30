@@ -2,7 +2,11 @@ import { Users, Camera, Award, MapPin } from "lucide-react";
 import PageTitle from "@/components/PageTitle";
 import Reveal from "@/components/Reveal";
 
-export const metadata = { title: "Why Fashion Zoom" };
+export const metadata = {
+  title: "Why Fashion Zoom",
+  description:
+    "Why choose Fashion Zoom: industry mentors, editorial portfolio shoots, real fashion shows, and a state‑wide network across Kerala.",
+};
 
 export default function WhyPage() {
   const items = [

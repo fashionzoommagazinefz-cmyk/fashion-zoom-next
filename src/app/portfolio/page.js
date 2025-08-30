@@ -2,7 +2,11 @@ import Image from "next/image";
 import PageTitle from "@/components/PageTitle";
 import Reveal from "@/components/Reveal";
 
-export const metadata = { title: "Portfolio — Fashion Zoom" };
+export const metadata = {
+  title: "Portfolio — Fashion Zoom",
+  description:
+    "Editorial portfolio highlights from Fashion Zoom — lookbooks, editorials, and alumni showcases shot across Kerala.",
+};
 
 export default function PortfolioPage() {
   const images = [
@@ -16,9 +20,9 @@ export default function PortfolioPage() {
         <PageTitle sectionKey="gallery" />
         <p className="text-lg text-gray-700 mb-8">Editorial shoots, lookbooks, and alumni highlights.</p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {images.map((src) => (
+          {images.map((src, i) => (
             <Reveal key={src} className="rounded-lg overflow-hidden border shadow-sm">
-              <Image src={src} alt="Portfolio image" width={1000} height={750} className="w-full h-auto" />
+              <Image src={src} alt={`Fashion Zoom editorial portfolio ${i + 1}`} width={1000} height={750} className="w-full h-auto" />
             </Reveal>
           ))}
         </div>

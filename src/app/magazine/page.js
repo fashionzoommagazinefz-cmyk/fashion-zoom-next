@@ -1,7 +1,11 @@
 import PageTitle from "@/components/PageTitle";
 import Reveal from "@/components/Reveal";
 
-export const metadata = { title: "Magazine — Fashion Zoom" };
+export const metadata = {
+  title: "Magazine — Fashion Zoom",
+  description:
+    "Fashion Zoom Magazine: editorials, covers, and press mentions celebrating Kerala’s fashion culture and talent.",
+};
 
 export default function MagazinePage() {
   return (

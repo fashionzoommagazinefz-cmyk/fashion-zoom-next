@@ -1,5 +1,9 @@
 import PageTitle from "@/components/PageTitle";
-export const metadata = { title: "FAQ — Fashion Zoom" };
+export const metadata = {
+  title: "FAQ — Fashion Zoom",
+  description:
+    "Answers about Fashion Zoom’s modeling academy, portfolio shoots, and fashion shows — eligibility, experience, and opportunities.",
+};
 
 export default function FaqPage() {
   return (

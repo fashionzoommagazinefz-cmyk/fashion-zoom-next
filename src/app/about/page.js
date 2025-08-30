@@ -2,7 +2,11 @@ import { Users, Camera, Award } from "lucide-react";
 import PageTitle from "@/components/PageTitle";
 import Reveal from "@/components/Reveal";
 
-export const metadata = { title: "About — Fashion Zoom" };
+export const metadata = {
+  title: "About — Fashion Zoom",
+  description:
+    "Learn about Fashion Zoom — Kerala’s premier fashion magazine and modeling academy shaping talent with professional training, editorial portfolios, and seasonal fashion shows since 2013.",
+};
 
 export default function AboutPage() {
   return (

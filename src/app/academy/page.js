@@ -2,7 +2,11 @@ import Link from "next/link";
 import PageTitle from "@/components/PageTitle";
 import Reveal from "@/components/Reveal";
 
-export const metadata = { title: "Modeling Academy — Fashion Zoom" };
+export const metadata = {
+  title: "Modeling Academy — Fashion Zoom",
+  description:
+    "Professional modeling courses in Kerala covering runway, grooming, camera presence, portfolio shoots, and industry readiness — with direct entry, no auditions required.",
+};
 
 export default function AcademyPage() {
   const modules = [

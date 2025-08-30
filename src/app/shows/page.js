@@ -2,7 +2,11 @@ import Image from "next/image";
 import PageTitle from "@/components/PageTitle";
 import Reveal from "@/components/Reveal";
 
-export const metadata = { title: "Fashion Shows — Fashion Zoom" };
+export const metadata = {
+  title: "Fashion Shows — Fashion Zoom",
+  description:
+    "Explore Fashion Zoom’s seasonal fashion shows across Kerala with categories for Teen, Miss, Traditional, and Kids — plus winners and highlights.",
+};
 
 export default function ShowsPage() {
   return (
