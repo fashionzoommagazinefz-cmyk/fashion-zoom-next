@@ -1,0 +1,44 @@
+name: Mirror to Secondary Repo
+
+on:
+  push:
+    branches: ["main"]
+    tags:
+      - "*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push main and tags to mirror
+        env:
+          MIRROR_OWNER: ${{ secrets.MIRROR_OWNER }}
+          MIRROR_REPO: ${{ secrets.MIRROR_REPO }}
+          MIRROR_TOKEN: ${{ secrets.MIRROR_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${MIRROR_OWNER:-}" ] || [ -z "${MIRROR_REPO:-}" ] || [ -z "${MIRROR_TOKEN:-}" ]; then
+            echo "Missing secrets. Please set MIRROR_OWNER, MIRROR_REPO, and MIRROR_TOKEN in repo settings." >&2
+            exit 1
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          MIRROR_URL="https://x-access-token:${MIRROR_TOKEN}@github.com/${MIRROR_OWNER}/${MIRROR_REPO}.git"
+          git remote add mirror "$MIRROR_URL"
+
+          # Push main branch
+          git push mirror HEAD:main
+          # Push tags (optional)
+          git push --tags mirror
+
