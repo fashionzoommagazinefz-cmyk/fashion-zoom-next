@@ -48,6 +48,14 @@ jobs:
             git remote add mirror "$MIRROR_URL"
           fi
 
-          # Push all branches and tags
-          git push --all mirror
-          git push --tags mirror
+          # Push all branches and tags; if history diverged, fall back to a mirror force push
+          if ! git push --all mirror; then
+            echo "Non-fast-forward for branches. Falling back to --mirror push (force)." >&2
+            git fetch --prune origin
+            git fetch --prune mirror || true
+            git push --mirror mirror
+          fi
+          if ! git push --tags mirror; then
+            echo "Non-fast-forward for tags. Forcing tags update." >&2
+            git push --force --tags mirror
+          fi
