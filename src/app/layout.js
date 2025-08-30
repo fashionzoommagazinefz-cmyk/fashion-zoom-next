@@ -1,6 +1,7 @@
 import "./globals.css";
 import Link from "next/link";
 import Image from "next/image";
+import { Inter, Playfair_Display } from "next/font/google";
 import { LocaleProvider } from "@/app/providers";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -8,6 +9,9 @@ import PageTransition from "@/components/PageTransition";
 
 const siteName = "Fashion Zoom Magazine";
 const siteDescription = "Kerala’s premier fashion magazine and modeling academy offering professional training, seasonal fashion shows, and editorial portfolio features since 2013.";
+
+const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const fontDisplay = Playfair_Display({ subsets: ["latin"], variable: "--font-display" });
 
 export const metadata = {
   title: {
@@ -64,8 +68,8 @@ export default function RootLayout({ children }) {
   };
 
   return (
-    <html lang="en">
-      <body className="antialiased min-h-screen bg-white text-foreground">
+    <html lang="en" className={`${fontSans.variable} ${fontDisplay.variable}`}>
+      <body className="antialiased min-h-screen bg-white text-foreground font-sans">
         <LocaleProvider>
           <SiteHeader />
           <main id="main" role="main">

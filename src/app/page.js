@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import HomeHero from "@/components/HomeHero";
 import Reveal from "@/components/Reveal";
+import Testimonials from "@/components/Testimonials";
 
 export default function Home() {
   return (
@@ -55,6 +56,20 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Stats */}
+      <section className="py-12 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          {[{n:'2013', l:'Founded'}, {n:'8+', l:'Seasons'}, {n:'5+', l:'Cities'}, {n:'1500+', l:'Alumni & Trainees'}].map((s) => (
+            <div key={s.n} className="rounded-lg border bg-white p-6 shadow-sm">
+              <div className="text-3xl md:text-4xl font-bold font-[var(--font-display)]">{s.n}</div>
+              <div className="text-sm text-gray-600 mt-1">{s.l}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <Testimonials />
 
       {/* CTA band */}
       <section className="py-10 bg-black text-white">
