@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://itzpraveen.github.io/fashion_zoom_website/sitemap.xml
+
