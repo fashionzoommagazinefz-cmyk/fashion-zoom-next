@@ -19,26 +19,34 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Push main and tags to mirror
+      - name: Push all branches and tags to mirror
         env:
           MIRROR_OWNER: ${{ secrets.MIRROR_OWNER }}
           MIRROR_REPO: ${{ secrets.MIRROR_REPO }}
           MIRROR_TOKEN: ${{ secrets.MIRROR_TOKEN }}
         run: |
           set -euo pipefail
-          if [ -z "${MIRROR_OWNER:-}" ] || [ -z "${MIRROR_REPO:-}" ] || [ -z "${MIRROR_TOKEN:-}" ]; then
-            echo "Missing secrets. Please set MIRROR_OWNER, MIRROR_REPO, and MIRROR_TOKEN in repo settings." >&2
+          OWNER="${MIRROR_OWNER:-fashionzoommagazinefz-cmyk}"
+          REPO="${MIRROR_REPO:-fashion-zoom-next}"
+          if [ -z "${MIRROR_TOKEN:-}" ]; then
+            echo "Missing secret MIRROR_TOKEN. Please add a PAT with repo write access to ${OWNER}/${REPO}." >&2
             exit 1
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          MIRROR_URL="https://x-access-token:${MIRROR_TOKEN}@github.com/${MIRROR_OWNER}/${MIRROR_REPO}.git"
-          git remote add mirror "$MIRROR_URL"
+          # Remove the default GITHUB_TOKEN header injected by actions/checkout,
+          # so our PAT is used for the mirror remote.
+          git config --global --unset-all http.https://github.com/.extraheader || true
 
-          # Push main branch
-          git push mirror HEAD:main
-          # Push tags (optional)
+          MIRROR_URL="https://x-access-token:${MIRROR_TOKEN}@github.com/${OWNER}/${REPO}.git"
+          if git remote get-url mirror >/dev/null 2>&1; then
+            git remote set-url mirror "$MIRROR_URL"
+          else
+            git remote add mirror "$MIRROR_URL"
+          fi
+
+          # Push all branches and tags
+          git push --all mirror
           git push --tags mirror
-
