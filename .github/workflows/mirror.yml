@@ -38,6 +38,7 @@ jobs:
 
           # Remove the default GITHUB_TOKEN header injected by actions/checkout,
           # so our PAT is used for the mirror remote.
+          git config --unset-all http.https://github.com/.extraheader || true
           git config --global --unset-all http.https://github.com/.extraheader || true
 
           MIRROR_URL="https://x-access-token:${MIRROR_TOKEN}@github.com/${OWNER}/${REPO}.git"
